@@ -1,4 +1,7 @@
-﻿using LightInject;
+﻿using Even3.Pratical.Test.Business;
+using Even3.Pratical.Test.Persistence;
+using Even3.Pratical.Test.Presentation;
+using LightInject;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
@@ -24,8 +27,8 @@ namespace Even3.Pratical.Test
 
             RouteTable.Routes.MapRoute(
                 name: "DefaultMvc",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Main", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}",
+                defaults: new { controller = "Main", action = "Index" }
             );
 
             configuration.Routes.MapHttpRoute(
@@ -36,8 +39,12 @@ namespace Even3.Pratical.Test
 
             var serviceContainer = new ServiceContainer();
             serviceContainer.ScopeManagerProvider = new PerLogicalCallContextScopeManagerProvider();
+            serviceContainer.RegisterFrom<PersistenceCompositionRoot>();
+            serviceContainer.RegisterFrom<BusinessCompositionRoot>();
             serviceContainer.RegisterApiControllers();
             serviceContainer.EnableWebApi(configuration);
+
+            configuration.MessageHandlers.Add(new RequestDelegatingHandler(serviceContainer));
         }
     }
 }

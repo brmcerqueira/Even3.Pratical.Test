@@ -37,8 +37,10 @@ namespace Even3.Pratical.Test
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            var serviceContainer = new ServiceContainer();
-            serviceContainer.ScopeManagerProvider = new PerLogicalCallContextScopeManagerProvider();
+            var serviceContainer = new ServiceContainer
+            {
+                ScopeManagerProvider = new PerLogicalCallContextScopeManagerProvider()
+            };
             serviceContainer.RegisterFrom<PersistenceCompositionRoot>();
             serviceContainer.RegisterFrom<BusinessCompositionRoot>();
             serviceContainer.RegisterApiControllers();

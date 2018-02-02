@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Even3.Pratical.Test.Persistence.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Even3.Pratical.Test.Persistence
 {
-    public class Dao<T> : IQueryable<T>
+    public class Dao<T> : IDao<T>
         where T : class
     {
         private readonly ObjectSet<T> objectSet;
@@ -56,7 +57,7 @@ namespace Even3.Pratical.Test.Persistence
             get { return this.getQueryable().Provider; }
         }
 
-        public Dao<T> Include<TProperty>(Expression<Func<T, TProperty>> path)
+        public IDao<T> Include<TProperty>(Expression<Func<T, TProperty>> path)
         {
             return new Dao<T>(() => getQueryable().Include(path));
         }

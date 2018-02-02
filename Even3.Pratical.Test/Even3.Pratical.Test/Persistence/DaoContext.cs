@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using Even3.Pratical.Test.Persistence.Interfaces;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
@@ -7,7 +8,7 @@ using System.Reflection;
 
 namespace Even3.Pratical.Test.Persistence
 {
-    public class DaoContext : DbContext
+    public class DaoContext : DbContext, IDaoContext
     {
         private ObjectContext objectContext;
 
@@ -33,7 +34,7 @@ namespace Even3.Pratical.Test.Persistence
             #endif
         }
 
-        public Dao<T> CreateDao<T>() where T : class
+        public IDao<T> CreateDao<T>() where T : class
         {
             return new Dao<T>(objectContext.CreateObjectSet<T>(), e => (T)objectContext.GetObjectByKey(e));
         }

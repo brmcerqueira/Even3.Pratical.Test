@@ -1,4 +1,5 @@
-﻿using LightInject;
+﻿using Even3.Pratical.Test.Properties;
+using LightInject;
 using System;
 using System.Runtime.Remoting.Messaging;
 
@@ -25,7 +26,7 @@ namespace Even3.Pratical.Test
                 {
                     if (currentScope == null)
                     {
-                        throw new InvalidOperationException("Tentativa de criar um objeto descartável, sem um escopo atual.");
+                        throw new InvalidOperationException(Resource.LogicalCallContextLifetimeException);
                     }
                     currentScope.TrackInstance(disposable);
                 }

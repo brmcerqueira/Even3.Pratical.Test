@@ -1,4 +1,5 @@
-﻿using LightInject;
+﻿using Even3.Pratical.Test.Persistence.Interfaces;
+using LightInject;
 
 namespace Even3.Pratical.Test.Persistence
 {
@@ -6,7 +7,7 @@ namespace Even3.Pratical.Test.Persistence
     {
         public void Compose(IServiceRegistry serviceRegistry)
         {
-            serviceRegistry.Register(f => new DaoContext("DefaultConnection"), new LogicalCallContextLifetime("DaoContext"));
+            serviceRegistry.Register<IDaoContext>(f => new DaoContext("DefaultConnection"), new LogicalCallContextLifetime("DaoContext"));
         }
     }
 }

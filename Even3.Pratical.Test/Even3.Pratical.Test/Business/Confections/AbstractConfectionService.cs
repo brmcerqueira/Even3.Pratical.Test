@@ -3,7 +3,6 @@ using Even3.Pratical.Test.Persistence.Interfaces;
 using Even3.Pratical.Test.Properties;
 using FluentValidation;
 using System;
-using System.Linq;
 using System.Text;
 
 namespace Even3.Pratical.Test.Business.Confections
@@ -35,18 +34,7 @@ namespace Even3.Pratical.Test.Business.Confections
             Context.SaveChanges();
         }
 
-        public virtual void Update(TDto dto)
-        {
-            Validate(dto);
-
-            var entity = LoadToUpdate(Dao).Single(FindOne(dto));
-
-            EntityFromDto(entity, dto, false);
-
-            Context.SaveChanges();
-        }
-
-        private void Validate(TDto dto)
+        protected void Validate(TDto dto)
         {
             if (Validator != null)
             {
@@ -66,18 +54,6 @@ namespace Even3.Pratical.Test.Business.Confections
                 }
             }
         }
-
-        protected virtual IDao<T> Load(IDao<T> dao)
-        {
-            return dao;
-        }
-
-        protected virtual IDao<T> LoadToUpdate(IDao<T> dao)
-        {
-            return Load(dao);
-        }
-
-        protected abstract Func<T, bool> FindOne(TDto dto);
 
         protected abstract void EntityFromDto(T entity, TDto dto, bool isNew);
     }

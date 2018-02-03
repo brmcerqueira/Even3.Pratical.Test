@@ -3,6 +3,5 @@
     public interface IConfectionService<in TDto>
     {
         void Create(TDto dto);
-        void Update(TDto dto);
     }
 }

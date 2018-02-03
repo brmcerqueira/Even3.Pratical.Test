@@ -1,7 +1,8 @@
 ﻿namespace Even3.Pratical.Test.Business.Interfaces
 {
-    public interface IReadConfectionService<in TDto> : IConfectionService<TDto>
+    public interface IReadConfectionService<TKey, in TDto> : IConfectionService<TDto>
     {
-        void Read(TDto dto);
+        void Read(TKey key, TDto dto);
+        void Update(TKey key, TDto dto);
     }
 }

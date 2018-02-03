@@ -119,6 +119,9 @@
     <Compile Include="Business\Confections\ReadConfectionService.cs" />
     <Compile Include="Business\Interfaces\IConfectionService.cs" />
     <Compile Include="Business\Interfaces\IReadConfectionService.cs" />
+    <Compile Include="Domain\Collaborator.cs" />
+    <Compile Include="Domain\Marking.cs" />
+    <Compile Include="Domain\Shift.cs" />
     <Compile Include="LogicalCallContextLifetime.cs" />
     <Compile Include="Persistence\Dao.cs" />
     <Compile Include="Persistence\DaoContext.cs" />

@@ -120,6 +120,9 @@
   <data name="LogicalCallContextLifetimeException" xml:space="preserve">
     <value>Tentativa de criar um objeto descartável, sem um escopo atual.</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
   <data name="Validation" xml:space="preserve">
     <value>Validação</value>
   </data>

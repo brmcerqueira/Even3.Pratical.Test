@@ -1,4 +1,7 @@
-﻿using LightInject;
+﻿using Even3.Pratical.Test.Business.Confections;
+using Even3.Pratical.Test.Business.Interfaces;
+using Even3.Pratical.Test.Business.Interfaces.Dtos.Savers;
+using LightInject;
 
 namespace Even3.Pratical.Test.Business
 {
@@ -6,7 +9,7 @@ namespace Even3.Pratical.Test.Business
     {
         public void Compose(IServiceRegistry serviceRegistry)
         {
-            
+            serviceRegistry.Register<IReadConfectionService<long, ICollaboratorSaveDto>, CollaboratorConfectionService>();
         }
     }
 }

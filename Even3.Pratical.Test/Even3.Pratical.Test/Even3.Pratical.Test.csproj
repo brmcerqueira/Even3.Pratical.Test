@@ -74,6 +74,9 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
@@ -84,6 +87,9 @@
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
@@ -111,26 +117,38 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\BusinessCompositionRoot.cs" />
     <Compile Include="Business\Confections\AbstractConfectionService.cs" />
+    <Compile Include="Business\Confections\CollaboratorConfectionService.cs" />
     <Compile Include="Business\Confections\ReadConfectionService.cs" />
+    <Compile Include="Business\Interfaces\Dtos\Savers\ICollaboratorSaveDto.cs" />
     <Compile Include="Business\Interfaces\IConfectionService.cs" />
     <Compile Include="Business\Interfaces\IReadConfectionService.cs" />
+    <Compile Include="Business\IReadConfectionService.cs" />
     <Compile Include="Domain\Collaborator.cs" />
     <Compile Include="Domain\Marking.cs" />
     <Compile Include="Domain\Shift.cs" />
     <Compile Include="LogicalCallContextLifetime.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Dao.cs" />
     <Compile Include="Persistence\DaoContext.cs" />
     <Compile Include="Persistence\Interfaces\IDao.cs" />
     <Compile Include="Persistence\Interfaces\IDaoContext.cs" />
+    <Compile Include="Persistence\Maps\CollaboratorMap.cs" />
+    <Compile Include="Persistence\Maps\MarkingMap.cs" />
+    <Compile Include="Persistence\Maps\ShiftMap.cs" />
+    <Compile Include="Persistence\MigrationsConfiguration.cs" />
     <Compile Include="Persistence\PersistenceCompositionRoot.cs" />
-    <Compile Include="Presentation\Controllers\AbstractConfectionController.cs" />
+    <Compile Include="Presentation\Controllers\Confections\AbstractConfectionController.cs" />
+    <Compile Include="Presentation\Controllers\Confections\CollaboratorConfectionController.cs" />
     <Compile Include="Presentation\Controllers\MainController.cs" />
-    <Compile Include="Presentation\Controllers\ReadConfectionController.cs" />
+    <Compile Include="Presentation\Controllers\Confections\ReadConfectionController.cs" />
+    <Compile Include="Presentation\Models\Savers\CollaboratorSaveModel.cs" />
     <Compile Include="Presentation\RequestDelegatingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Global.asax.cs">

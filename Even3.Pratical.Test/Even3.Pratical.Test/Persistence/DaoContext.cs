@@ -12,6 +12,11 @@ namespace Even3.Pratical.Test.Persistence
     {
         private ObjectContext objectContext;
 
+        static DaoContext()
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<DaoContext>());
+        }
+
         public DaoContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
@@ -29,7 +34,6 @@ namespace Even3.Pratical.Test.Persistence
             Configuration.LazyLoadingEnabled = false;
             objectContext = ((IObjectContextAdapter)this).ObjectContext;
             #if DEBUG
-                Debug.WriteLine(string.Format("Script: {0}", objectContext.CreateDatabaseScript()));
                 Database.Log = data => Debug.WriteLine(string.Format("DaoContext: {0}", data));
             #endif
         }

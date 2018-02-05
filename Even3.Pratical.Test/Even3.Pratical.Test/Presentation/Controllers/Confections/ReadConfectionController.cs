@@ -1,7 +1,7 @@
 ﻿using Even3.Pratical.Test.Business.Interfaces;
 using System.Web.Http;
 
-namespace Even3.Pratical.Test.Presentation.Controllers
+namespace Even3.Pratical.Test.Presentation.Controllers.Confections
 {
     public abstract class ReadConfectionController<T, TKey, TService> : AbstractConfectionController<T, TService>
         where T : new()

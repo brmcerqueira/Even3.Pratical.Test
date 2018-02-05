@@ -1,4 +1,5 @@
 ﻿using LightInject;
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,9 +21,18 @@ namespace Even3.Pratical.Test.Presentation
 
             return await base.SendAsync(request, cancellationToken).ContinueWith((task) =>
             {
-                serviceContainer.ScopeManagerProvider.GetScopeManager(serviceContainer).CurrentScope.Dispose();
+                Finish(serviceContainer.ScopeManagerProvider.GetScopeManager(serviceContainer).CurrentScope);
                 return task.Result;
             });
+        }
+
+        private void Finish(Scope scope)
+        {
+            if (scope.ChildScope != null)
+            {
+                scope.ChildScope.Completed += (s, e) => scope.Dispose();
+                Finish(scope.ChildScope);
+            }          
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Even3.Pratical.Test.Business.Interfaces;
 using Even3.Pratical.Test.Persistence.Interfaces;
-using FluentValidation;
 using System;
 using System.Linq;
 
@@ -9,7 +8,7 @@ namespace Even3.Pratical.Test.Business.Confections
     internal abstract class ReadConfectionService<T, TKey, TDto> : AbstractConfectionService<T, TDto>, IReadConfectionService<TKey, TDto>
         where T : class
     {
-        public ReadConfectionService(IDaoContext context, IValidator<TDto> validator = null) : base(context, validator)
+        public ReadConfectionService(IDaoContext context) : base(context)
         {
         }
 

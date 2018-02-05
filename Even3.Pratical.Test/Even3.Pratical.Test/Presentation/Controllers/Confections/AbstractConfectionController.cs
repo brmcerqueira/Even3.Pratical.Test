@@ -1,7 +1,7 @@
 ﻿using Even3.Pratical.Test.Business.Interfaces;
 using System.Web.Http;
 
-namespace Even3.Pratical.Test.Presentation.Controllers
+namespace Even3.Pratical.Test.Presentation.Controllers.Confections
 {
     public abstract class AbstractConfectionController<T, TService> : ApiController
         where TService : IConfectionService<T>

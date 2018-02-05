@@ -12,13 +12,17 @@ namespace Even3.Pratical.Test.Business.Confections
     {
         protected IDaoContext Context { get; private set; }
         protected IDao<T> Dao { get; private set; }
-        protected IValidator<TDto> Validator { get; private set; }
+        protected virtual IValidator<TDto> Validator {
+            get
+            {
+                return null;
+            }
+        }
 
-        public AbstractConfectionService(IDaoContext context, IValidator<TDto> validator = null)
+        public AbstractConfectionService(IDaoContext context)
         {
             Context = context;
             Dao = context.CreateDao<T>();
-            Validator = validator;
         }
 
         public virtual void Create(TDto dto)

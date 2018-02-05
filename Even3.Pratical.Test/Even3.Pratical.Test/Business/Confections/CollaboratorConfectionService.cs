@@ -39,5 +39,10 @@ namespace Even3.Pratical.Test.Business.Confections
         }
 
         protected override Func<Collaborator, bool> FindOne(long key) => e => e.Id == key;
+
+        protected override void SetupDelete(dynamic data, long key)
+        {
+            data.Id = key;
+        }
     }
 }

@@ -36,8 +36,8 @@ namespace Even3.Pratical.Test
 
             configuration.Routes.MapHttpRoute(
                 name: "DefaultRestApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{key}",
+                defaults: new { key = RouteParameter.Optional }
             );
 
             RouteTable.Routes.MapRoute(

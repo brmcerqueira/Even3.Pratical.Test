@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Even3.Pratical.Test.Business.Confections
 {
-    internal abstract class ConfectionService<T, TDto> : IConfectionService<TDto>
+    internal abstract class ConfectionService<T, TKey, TDto> : IConfectionService<TKey, TDto>
         where T : class
     {
         protected IDaoContext Context { get; private set; }
@@ -37,6 +37,14 @@ namespace Even3.Pratical.Test.Business.Confections
 
             Context.SaveChanges();
         }
+
+        public virtual void Delete(TKey key)
+        {
+            Dao.Delete(Dao.GetReference(d => SetupDelete(d, key)));
+            Context.SaveChanges();
+        }
+
+        protected abstract void SetupDelete(dynamic data, TKey key);
 
         protected void Validate(TDto dto)
         {

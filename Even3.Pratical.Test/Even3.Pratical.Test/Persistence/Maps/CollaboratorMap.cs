@@ -12,7 +12,9 @@ namespace Even3.Pratical.Test.Persistence.Maps
             HasKey(e => e.Id);
             Property(e => e.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.Name).HasColumnName("name").IsRequired().HasMaxLength(50);
+            HasIndex(e => e.Email).IsUnique();
             Property(e => e.Email).HasColumnName("email").IsRequired().HasMaxLength(50);
+            HasIndex(e => e.Registration).IsUnique();
             Property(e => e.Registration).HasColumnName("registration").IsRequired().HasMaxLength(10);
         }
     }

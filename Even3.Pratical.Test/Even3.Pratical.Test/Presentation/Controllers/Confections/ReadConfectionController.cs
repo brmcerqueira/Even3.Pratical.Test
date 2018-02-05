@@ -3,7 +3,7 @@ using System.Web.Http;
 
 namespace Even3.Pratical.Test.Presentation.Controllers.Confections
 {
-    public abstract class ReadConfectionController<T, TKey, TService> : AbstractConfectionController<T, TService>
+    public abstract class ReadConfectionController<T, TKey, TService> : ConfectionController<T, TService>
         where T : new()
         where TService : IReadConfectionService<TKey, T>
     {

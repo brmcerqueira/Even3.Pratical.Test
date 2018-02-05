@@ -1,6 +1,8 @@
 ﻿using Even3.Pratical.Test.Business.Confections;
 using Even3.Pratical.Test.Business.Interfaces;
+using Even3.Pratical.Test.Business.Interfaces.Dtos.Filters;
 using Even3.Pratical.Test.Business.Interfaces.Dtos.Savers;
+using Even3.Pratical.Test.Business.Queries;
 using LightInject;
 
 namespace Even3.Pratical.Test.Business
@@ -9,6 +11,7 @@ namespace Even3.Pratical.Test.Business
     {
         public void Compose(IServiceRegistry serviceRegistry)
         {
+            serviceRegistry.Register<IQueryService<ICollaboratorFilterDto>, CollaboratorQueryService>();
             serviceRegistry.Register<IReadConfectionService<long, ICollaboratorSaveDto>, CollaboratorConfectionService>();
         }
     }

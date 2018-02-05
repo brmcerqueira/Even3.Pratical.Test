@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Even3.Pratical.Test.Business.Confections
 {
-    internal abstract class AbstractConfectionService<T, TDto> : IConfectionService<TDto>
+    internal abstract class ConfectionService<T, TDto> : IConfectionService<TDto>
         where T : class
     {
         protected IDaoContext Context { get; private set; }
@@ -19,7 +19,7 @@ namespace Even3.Pratical.Test.Business.Confections
             }
         }
 
-        public AbstractConfectionService(IDaoContext context)
+        public ConfectionService(IDaoContext context)
         {
             Context = context;
             Dao = context.CreateDao<T>();

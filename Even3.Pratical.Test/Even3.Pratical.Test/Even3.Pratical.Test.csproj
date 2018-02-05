@@ -123,18 +123,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\BusinessCompositionRoot.cs" />
-    <Compile Include="Business\Confections\AbstractConfectionService.cs" />
+    <Compile Include="Business\Confections\ConfectionService.cs" />
     <Compile Include="Business\Confections\CollaboratorConfectionService.cs" />
     <Compile Include="Business\Confections\ReadConfectionService.cs" />
+    <Compile Include="Business\Interfaces\Dtos\Filters\ICollaboratorFilterDto.cs" />
+    <Compile Include="Business\Interfaces\Dtos\Filters\IFilterDto.cs" />
     <Compile Include="Business\Interfaces\Dtos\Savers\ICollaboratorSaveDto.cs" />
     <Compile Include="Business\Interfaces\IConfectionService.cs" />
+    <Compile Include="Business\Interfaces\IQueryService.cs" />
     <Compile Include="Business\Interfaces\IReadConfectionService.cs" />
-    <Compile Include="Business\IReadConfectionService.cs" />
+    <Compile Include="Business\Queries\CollaboratorQueryService.cs" />
+    <Compile Include="Business\Queries\QueryService.cs" />
     <Compile Include="Domain\Collaborator.cs" />
     <Compile Include="Domain\Marking.cs" />
     <Compile Include="Domain\Shift.cs" />
     <Compile Include="LogicalCallContextLifetime.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Dao.cs" />
     <Compile Include="Persistence\DaoContext.cs" />
     <Compile Include="Persistence\Interfaces\IDao.cs" />
@@ -144,10 +147,14 @@
     <Compile Include="Persistence\Maps\ShiftMap.cs" />
     <Compile Include="Persistence\MigrationsConfiguration.cs" />
     <Compile Include="Persistence\PersistenceCompositionRoot.cs" />
-    <Compile Include="Presentation\Controllers\Confections\AbstractConfectionController.cs" />
+    <Compile Include="Presentation\Controllers\Confections\ConfectionController.cs" />
     <Compile Include="Presentation\Controllers\Confections\CollaboratorConfectionController.cs" />
     <Compile Include="Presentation\Controllers\MainController.cs" />
     <Compile Include="Presentation\Controllers\Confections\ReadConfectionController.cs" />
+    <Compile Include="Presentation\Controllers\Queries\CollaboratorQueryController.cs" />
+    <Compile Include="Presentation\Controllers\Queries\QueryController.cs" />
+    <Compile Include="Presentation\Models\Filters\CollaboratorFilterModel.cs" />
+    <Compile Include="Presentation\Models\Filters\FilterModel.cs" />
     <Compile Include="Presentation\Models\Savers\CollaboratorSaveModel.cs" />
     <Compile Include="Presentation\RequestDelegatingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -177,6 +184,7 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

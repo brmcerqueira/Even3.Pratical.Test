@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Even3.Pratical.Test.Business.Confections
 {
-    internal abstract class ReadConfectionService<T, TKey, TDto> : AbstractConfectionService<T, TDto>, IReadConfectionService<TKey, TDto>
+    internal abstract class ReadConfectionService<T, TKey, TDto> : ConfectionService<T, TDto>, IReadConfectionService<TKey, TDto>
         where T : class
     {
         public ReadConfectionService(IDaoContext context) : base(context)

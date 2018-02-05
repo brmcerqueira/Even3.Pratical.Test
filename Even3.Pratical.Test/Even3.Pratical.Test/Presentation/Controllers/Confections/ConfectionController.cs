@@ -3,12 +3,12 @@ using System.Web.Http;
 
 namespace Even3.Pratical.Test.Presentation.Controllers.Confections
 {
-    public abstract class AbstractConfectionController<T, TService> : ApiController
+    public abstract class ConfectionController<T, TService> : ApiController
         where TService : IConfectionService<T>
     {
         protected TService Service { get; private set; }
 
-        public AbstractConfectionController(TService service)
+        public ConfectionController(TService service)
         {
             Service = service;
         }

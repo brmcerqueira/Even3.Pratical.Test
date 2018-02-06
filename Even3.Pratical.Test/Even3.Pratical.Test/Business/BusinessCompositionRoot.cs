@@ -13,6 +13,8 @@ namespace Even3.Pratical.Test.Business
         {
             serviceRegistry.Register<IQueryService<ICollaboratorFilterDto>, CollaboratorQueryService>();
             serviceRegistry.Register<IReadConfectionService<long, ICollaboratorSaveDto>, CollaboratorConfectionService>();
+            serviceRegistry.Register<IQueryService<IShiftFilterDto>, ShiftQueryService>();
+            serviceRegistry.Register<IReadConfectionService<int, IShiftSaveDto>, ShiftConfectionService>();
         }
     }
 }

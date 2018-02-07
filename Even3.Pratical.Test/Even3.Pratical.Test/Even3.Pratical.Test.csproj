@@ -133,8 +133,10 @@
     <Compile Include="Business\Interfaces\Dtos\Savers\ICollaboratorSaveDto.cs" />
     <Compile Include="Business\Interfaces\Dtos\Savers\IShiftSaveDto.cs" />
     <Compile Include="Business\Interfaces\IConfectionService.cs" />
+    <Compile Include="Business\Interfaces\IMarkingService.cs" />
     <Compile Include="Business\Interfaces\IQueryService.cs" />
     <Compile Include="Business\Interfaces\IReadConfectionService.cs" />
+    <Compile Include="Business\MarkingService.cs" />
     <Compile Include="Business\Queries\CollaboratorQueryService.cs" />
     <Compile Include="Business\Queries\QueryService.cs" />
     <Compile Include="Business\Queries\ShiftQueryService.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Presentation\Controllers\Confections\ShiftConfectionController.cs" />
     <Compile Include="Presentation\Controllers\MainController.cs" />
     <Compile Include="Presentation\Controllers\Confections\ReadConfectionController.cs" />
+    <Compile Include="Presentation\Controllers\MarkingController.cs" />
     <Compile Include="Presentation\Controllers\Queries\CollaboratorQueryController.cs" />
     <Compile Include="Presentation\Controllers\Queries\QueryController.cs" />
     <Compile Include="Presentation\Controllers\Queries\ShiftQueryController.cs" />

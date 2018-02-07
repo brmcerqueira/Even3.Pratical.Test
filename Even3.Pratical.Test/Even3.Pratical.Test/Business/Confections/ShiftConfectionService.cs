@@ -20,7 +20,7 @@ namespace Even3.Pratical.Test.Business.Confections
                 validator.RuleFor(e => e.DayOfWeek).NotEmpty();
                 validator.RuleFor(e => e.Input).NotEmpty();
                 validator.RuleFor(e => e.Output).NotEmpty();
-                validator.RuleFor(e => e.Interval).NotEmpty();
+                validator.RuleFor(e => e.Interval).GreaterThan(TimeSpan.FromMinutes(15)).NotEmpty();
                 return validator;
             }
         }

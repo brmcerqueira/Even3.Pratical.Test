@@ -15,6 +15,7 @@ namespace Even3.Pratical.Test.Business
             serviceRegistry.Register<IReadConfectionService<long, ICollaboratorSaveDto>, CollaboratorConfectionService>();
             serviceRegistry.Register<IQueryService<IShiftFilterDto>, ShiftQueryService>();
             serviceRegistry.Register<IReadConfectionService<int, IShiftSaveDto>, ShiftConfectionService>();
+            serviceRegistry.Register<IMarkingService, MarkingService>();
         }
     }
 }

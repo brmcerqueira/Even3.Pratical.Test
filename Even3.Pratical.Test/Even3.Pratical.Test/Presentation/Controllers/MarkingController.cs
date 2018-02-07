@@ -17,5 +17,10 @@ namespace Even3.Pratical.Test.Presentation.Controllers
         {
             return Service.Show(key);
         }
+
+        public void Put(long key)
+        {
+            Service.Register(key);
+        }
     }
 }

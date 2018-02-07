@@ -85,5 +85,20 @@ namespace Even3.Pratical.Test.Business
                 };
             });
         }
+
+        public void Register(long collaboratorId)
+        {
+            var daoMarking = Context.CreateDao<Marking>();
+            var daoCollaborator = Context.CreateDao<Collaborator>();
+
+            var entity = daoMarking.Create();
+
+            entity.Date = DateTime.Now;
+            entity.Collaborator = daoCollaborator.GetReference(e => e.Id = collaboratorId);
+
+            daoMarking.Add(entity);
+
+            Context.SaveChanges();
+        }
     }
 }

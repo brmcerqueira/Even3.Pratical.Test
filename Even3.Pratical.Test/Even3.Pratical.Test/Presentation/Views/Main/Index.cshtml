@@ -1,9 +1,25 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="even3-pratical-test" lang="en">
 <head>
     <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" src="~/bundles/css?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1">
+    <script type="text/javascript" src="~/bundles/ui?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1"></script>
+    <script type="text/javascript" src="~/bundles/views?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1"></script>
 </head>
 <body>
-
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="/">Início</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Colaboradores</a>
+        </li>
+    </ul>
+    <div class="container">
+        <div class="main-container" ng-view></div>
+    </div>
 </body>
 </html>

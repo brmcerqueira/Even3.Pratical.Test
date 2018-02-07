@@ -9,8 +9,8 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace Even3.Pratical.Test
@@ -28,6 +28,8 @@ namespace Even3.Pratical.Test
                 if (memberInfo == null) return null;
                 return Resource.ResourceManager.GetString(memberInfo.Name);
             };
+
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ViewEngines.Engines.OfType<RazorViewEngine>().First().ViewLocationFormats = new string[] {
                 "~/Presentation/Views/{1}/{0}.cshtml",

@@ -45,7 +45,7 @@ namespace Even3.Pratical.Test
             RouteTable.Routes.MapRoute(
                 name: "DefaultMvc",
                 url: "{key}",
-                defaults: new { controller = "Main", action = "Index" }
+                defaults: new { controller = "Main", action = "Index", key = RouteParameter.Optional }
             );
 
             var serviceContainer = new ServiceContainer();

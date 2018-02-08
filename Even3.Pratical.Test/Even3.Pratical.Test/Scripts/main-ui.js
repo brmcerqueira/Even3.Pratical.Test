@@ -24,183 +24,173 @@ main.config(["$routeProvider", function ($routeProvider) {
     }]);
 /// <reference path="references.ts"/>
 /// <reference path="main.ts"/>
+var ConfectionService = /** @class */ (function () {
+    function ConfectionService($http, keyService) {
+        this.$http = $http;
+        this.keyService = keyService;
+    }
+    ConfectionService.prototype.setup = function (scope, url, init, load, prepareToSave) {
+        var _this = this;
+        var key = this.keyService.key;
+        this.keyService.key = null;
+        init();
+        if (key) {
+            this.$http.get(url + key).then(function (response) {
+                load(response.data);
+            });
+        }
+        scope.save = function () {
+            var entity = prepareToSave();
+            if (key) {
+                _this.$http.post(url + key, entity).then(function () {
+                    alert("salvo!");
+                }, function (reason) {
+                    alert(reason.data.exceptionMessage);
+                });
+            }
+            else {
+                _this.$http.put(url, entity).then(function () {
+                    alert("salvo!");
+                    init();
+                }, function (reason) {
+                    alert(reason.data.exceptionMessage);
+                });
+            }
+        };
+    };
+    return ConfectionService;
+}());
+main.service('$confectionService', ['$http', "$keyService", ConfectionService]);
+/// <reference path="references.ts"/>
+/// <reference path="main.ts"/>
 var MainController = /** @class */ (function () {
     function MainController($scope, $http) {
-        $scope.name = null;
-        $http.get('api/collaborator/' + registration).then(function (response) {
-            $scope.name = response.data;
-        }, function (reason) {
-            alert(reason.data.exceptionMessage);
-        });
+        $scope.name = "Procurando...";
+        var userNotFoundMessage = "Usuário não encontrado!";
+        if (registration) {
+            $http.get('api/collaborator/' + registration).then(function (response) {
+                $scope.name = response.data ? response.data : userNotFoundMessage;
+            }, function (reason) {
+                alert(reason.data.exceptionMessage);
+            });
+        }
+        else {
+            $scope.name = userNotFoundMessage;
+        }
     }
     return MainController;
 }());
 main.controller('mainController', ['$scope', '$http', MainController]);
 /// <reference path="references.ts"/>
 /// <reference path="main.ts"/>
-var ShiftConfectionController = /** @class */ (function () {
-    function ShiftConfectionController($scope, $http, keyService) {
-        var url = 'api/shiftConfection/';
-        var key = keyService.key;
-        keyService.key = null;
-        var init = function () {
-            $scope.dayOfWeek = "0";
-            $scope.input = null;
-            $scope.output = null;
-            $scope.interval = null;
+var QueryService = /** @class */ (function () {
+    function QueryService($http, $location, keyService) {
+        this.$http = $http;
+        this.$location = $location;
+        this.keyService = keyService;
+    }
+    QueryService.prototype.setup = function (scope, editRoute, removeRoute, queryRoute) {
+        var _this = this;
+        scope.source = [];
+        scope.edit = function (id) {
+            _this.keyService.key = id;
+            _this.$location.path(editRoute);
         };
+        scope.remove = function (id) {
+            if (confirm("Deseja excluir esse item?")) {
+                _this.$http.delete(removeRoute + id).then(function () {
+                    alert("excluido!");
+                    updateSource();
+                }, function (reason) {
+                    alert(reason.data.exceptionMessage);
+                });
+            }
+        };
+        var updateSource = function () {
+            _this.$http.put(queryRoute, {}).then(function (response) {
+                scope.source = response.data;
+            }, function (reason) {
+                alert(reason.data.exceptionMessage);
+            });
+        };
+        updateSource();
+    };
+    return QueryService;
+}());
+main.service('$queryService', ['$http', '$location', "$keyService", QueryService]);
+/// <reference path="references.ts"/>
+/// <reference path="main.ts"/>
+var ShiftConfectionController = /** @class */ (function () {
+    function ShiftConfectionController($scope, confectionService) {
         var parseFromTimeSpan = function (timeSpan) {
             return new Date('01 01 1970 ' + timeSpan);
         };
         var parseToTimeSpan = function (date) {
             return date.getHours() + ":" + date.getMinutes();
         };
-        init();
-        if (key) {
-            $http.get(url + key).then(function (response) {
-                var data = response.data;
-                $scope.dayOfWeek = data.dayOfWeek.toString();
-                $scope.input = parseFromTimeSpan(data.input);
-                $scope.output = parseFromTimeSpan(data.output);
-                $scope.interval = parseFromTimeSpan(data.interval);
-            });
-        }
-        $scope.save = function () {
-            var entity = {
+        confectionService.setup($scope, 'api/shiftConfection/', function () {
+            $scope.dayOfWeek = "0";
+            $scope.input = null;
+            $scope.output = null;
+            $scope.interval = null;
+        }, function (data) {
+            $scope.dayOfWeek = data.dayOfWeek.toString();
+            $scope.input = parseFromTimeSpan(data.input);
+            $scope.output = parseFromTimeSpan(data.output);
+            $scope.interval = parseFromTimeSpan(data.interval);
+        }, function () {
+            return {
                 dayOfWeek: parseInt($scope.dayOfWeek),
                 input: parseToTimeSpan($scope.input),
                 output: parseToTimeSpan($scope.output),
                 interval: parseToTimeSpan($scope.interval)
             };
-            if (key) {
-                $http.post(url + key, entity).then(function () {
-                    alert("salvo!");
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
-            }
-            else {
-                $http.put(url, entity).then(function () {
-                    alert("salvo!");
-                    init();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
-            }
-        };
+        });
     }
     return ShiftConfectionController;
 }());
-main.controller('shiftConfectionController', ['$scope', '$http', "$keyService", ShiftConfectionController]);
+main.controller('shiftConfectionController', ['$scope', '$confectionService', ShiftConfectionController]);
 /// <reference path="references.ts"/>
 /// <reference path="main.ts"/>
 var CollaboratorConfectionController = /** @class */ (function () {
-    function CollaboratorConfectionController($scope, $http, keyService) {
-        var url = 'api/collaboratorConfection/';
-        var key = keyService.key;
-        keyService.key = null;
-        var init = function () {
+    function CollaboratorConfectionController($scope, confectionService) {
+        confectionService.setup($scope, 'api/collaboratorConfection/', function () {
             $scope.name = null;
             $scope.email = null;
             $scope.registration = null;
-        };
-        init();
-        if (key) {
-            $http.get(url + key).then(function (response) {
-                var data = response.data;
-                $scope.name = data.name;
-                $scope.email = data.email;
-                $scope.registration = data.registration;
-            });
-        }
-        $scope.save = function () {
-            var entity = {
+        }, function (data) {
+            $scope.name = data.name;
+            $scope.email = data.email;
+            $scope.registration = data.registration;
+        }, function () {
+            return {
                 name: $scope.name,
                 email: $scope.email,
                 registration: $scope.registration
             };
-            if (key) {
-                $http.post(url + key, entity).then(function () {
-                    alert("salvo!");
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
-            }
-            else {
-                $http.put(url, entity).then(function () {
-                    alert("salvo!");
-                    init();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
-            }
-        };
+        });
     }
     return CollaboratorConfectionController;
 }());
-main.controller('collaboratorConfectionController', ['$scope', '$http', "$keyService", CollaboratorConfectionController]);
+main.controller('collaboratorConfectionController', ['$scope', '$confectionService', CollaboratorConfectionController]);
 /// <reference path="references.ts"/>
 /// <reference path="main.ts"/>
 var ShiftQueryController = /** @class */ (function () {
-    function ShiftQueryController($scope, $http, $location, keyService) {
-        $scope.source = [];
-        $scope.edit = function (id) {
-            keyService.key = id;
-            $location.path("/shiftConfection");
-        };
-        $scope.remove = function (id) {
-            if (confirm("Deseja excluir esse item?")) {
-                $http.delete('api/shiftConfection/' + id).then(function () {
-                    alert("excluido!");
-                    updateSource();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
-            }
-        };
-        var updateSource = function () {
-            $http.put('api/shiftQuery/', {}).then(function (response) {
-                $scope.source = response.data;
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
-        };
-        updateSource();
+    function ShiftQueryController($scope, queryService) {
+        queryService.setup($scope, "/shiftConfection", 'api/shiftConfection/', 'api/shiftQuery/');
     }
     return ShiftQueryController;
 }());
-main.controller('shiftQueryController', ['$scope', '$http', '$location', "$keyService", ShiftQueryController]);
+main.controller('shiftQueryController', ['$scope', '$queryService', ShiftQueryController]);
 /// <reference path="references.ts"/>
 /// <reference path="main.ts"/>
 var CollaboratorQueryController = /** @class */ (function () {
-    function CollaboratorQueryController($scope, $http, $location, keyService) {
-        $scope.source = [];
-        $scope.edit = function (id) {
-            keyService.key = id;
-            $location.path("/collaboratorConfection");
-        };
-        $scope.remove = function (id) {
-            if (confirm("Deseja excluir esse item?")) {
-                $http.delete('api/collaboratorConfection/' + id).then(function () {
-                    alert("excluido!");
-                    updateSource();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
-            }
-        };
-        var updateSource = function () {
-            $http.put('api/collaboratorQuery/', {}).then(function (response) {
-                $scope.source = response.data;
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
-        };
-        updateSource();
+    function CollaboratorQueryController($scope, queryService) {
+        queryService.setup($scope, "/collaboratorConfection", 'api/collaboratorConfection/', 'api/collaboratorQuery/');
     }
     return CollaboratorQueryController;
 }());
-main.controller('collaboratorQueryController', ['$scope', '$http', '$location', "$keyService", CollaboratorQueryController]);
+main.controller('collaboratorQueryController', ['$scope', '$queryService', CollaboratorQueryController]);
 /// <reference path="references.ts"/>
 /// <reference path="main.ts"/>
 function dayOfWeekFilter() {
@@ -238,22 +228,24 @@ main.filter('dayOfWeek', dayOfWeekFilter);
 var DefaultController = /** @class */ (function () {
     function DefaultController($scope, $http) {
         $scope.markings = [];
-        $scope.register = function () {
-            $http.put('api/marking/' + registration, null).then(function () {
-                updateMarkings();
-                alert("registrado!");
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
-        };
-        var updateMarkings = function () {
-            $http.get('api/marking/' + registration).then(function (response) {
-                $scope.markings = response.data;
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
-        };
-        updateMarkings();
+        if (registration) {
+            $scope.register = function () {
+                $http.put('api/marking/' + registration, null).then(function () {
+                    updateMarkings();
+                    alert("registrado!");
+                }, function (reason) {
+                    alert(reason.data.exceptionMessage);
+                });
+            };
+            var updateMarkings = function () {
+                $http.get('api/marking/' + registration).then(function (response) {
+                    $scope.markings = response.data;
+                }, function (reason) {
+                    alert(reason.data.exceptionMessage);
+                });
+            };
+            updateMarkings();
+        }
     }
     return DefaultController;
 }());

@@ -3,12 +3,18 @@
 
 class MainController {
     constructor($scope: ng.IScope, $http: ng.IHttpService) {
-        $scope.name = null;
-        $http.get('api/collaborator/' + registration).then(function (response) {
-            $scope.name = response.data;
-        }, function (reason) {
-            alert(reason.data.exceptionMessage);
-        });
+        $scope.name = "Procurando...";
+        var userNotFoundMessage = "Usuário não encontrado!";
+        if (registration) {
+            $http.get('api/collaborator/' + registration).then(function (response) {
+                $scope.name = response.data ? response.data : userNotFoundMessage;
+            }, function (reason) {
+                alert(reason.data.exceptionMessage);
+            });
+        }
+        else {
+            $scope.name = userNotFoundMessage;
+        }
     }
 }
 

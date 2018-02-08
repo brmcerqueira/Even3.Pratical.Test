@@ -298,7 +298,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Presentation\Ui\confection.service.ts" />
     <TypeScriptCompile Include="Presentation\Ui\main.controller.ts" />
+    <TypeScriptCompile Include="Presentation\Ui\query.service.ts" />
     <TypeScriptCompile Include="Presentation\Ui\shift.confection.controller.ts" />
     <TypeScriptCompile Include="Presentation\Ui\collaborator.confection.controller.ts" />
     <TypeScriptCompile Include="Presentation\Ui\shift.query.controller.ts" />

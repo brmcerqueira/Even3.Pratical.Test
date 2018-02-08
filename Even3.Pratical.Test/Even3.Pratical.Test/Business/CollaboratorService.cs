@@ -19,7 +19,7 @@ namespace Even3.Pratical.Test.Business
             IQueryable<Collaborator> query = Context.CreateDao<Collaborator>();
             return (from col in query
                     where col.Registration == registration
-                    select col.Name).Single();
+                    select col.Name).SingleOrDefault();
         }
     }
 }

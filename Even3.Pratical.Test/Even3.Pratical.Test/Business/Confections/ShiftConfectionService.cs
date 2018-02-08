@@ -17,7 +17,7 @@ namespace Even3.Pratical.Test.Business.Confections
             get
             {
                 var validator = new InlineValidator<IShiftSaveDto>();
-                validator.RuleFor(e => e.DayOfWeek).NotEmpty();
+                validator.RuleFor(e => e.DayOfWeek);
                 validator.RuleFor(e => e.Input).NotEmpty();
                 validator.RuleFor(e => e.Output).NotEmpty();
                 validator.RuleFor(e => e.Interval).GreaterThan(TimeSpan.FromMinutes(15)).NotEmpty();

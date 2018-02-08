@@ -11,6 +11,7 @@ namespace Even3.Pratical.Test.Persistence.Maps
             ToTable("shift");
             HasKey(e => e.Id);
             Property(e => e.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            HasIndex(e => e.DayOfWeek).IsUnique();
             Property(e => e.DayOfWeek).HasColumnName("dayOfWeek").IsRequired();
             Property(e => e.Input).HasColumnName("input").IsRequired();
             Property(e => e.Output).HasColumnName("output").IsRequired();

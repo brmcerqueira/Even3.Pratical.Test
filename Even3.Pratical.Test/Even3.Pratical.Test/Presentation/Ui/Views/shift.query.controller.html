@@ -1,0 +1,12 @@
+﻿<table class="table">
+    <tbody>
+        <tr ng-repeat="m in source">
+            <td>{{ m.dayOfWeek | dayOfWeek }}</td>
+            <td>{{ m.input }}</td>
+            <td>{{ m.output }}</td>
+            <td>{{ m.interval }}</td>
+            <td><button type="button" class="btn btn-primary" ng-click="edit(m.id)">Editar</button></td>
+            <td><button type="button" class="btn btn-primary" ng-click="remove(m.id)">Excluir</button></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,25 +1,49 @@
-﻿<div>
-    <button type="button" class="btn btn-primary" ng-click="register()">Registrar</button>
-    <div class="card">
-        <div class="card-block" ng-repeat="kvp in markings">
-            <h6 class="card-title">{{ kvp.key | date: 'MM/yyyy' }}</h6>
-            <table class="table">
-                <tbody>
-                    <tr ng-repeat="m in kvp.value">
-                        <td>{{ m.date | date: 'dd/MM/yyyy' }}</td>
-                        <td>{{ m.dayOfWeek | dayOfWeek }}</td>
-                        <td><span class="badge badge-pill badge-primary" ng-repeat="hour in m.markings track by $index">{{ hour }}</span></td>
-                        <td>
-                            <span ng-show="m.missingMarkingInfraction" class="badge badge-pill badge-warning">Falta marcações para fechar o dia</span>
-                            <span ng-show="m.minimumIntervalInfraction" class="badge badge-pill badge-warning">Intervalo mínimo excedido</span>
-                            <span ng-show="m.minimumHoursInfraction" class="badge badge-pill badge-warning">Trabalhou menos que 4 horas</span>
-                            <span ng-show="m.maximumHoursInfraction" class="badge badge-pill badge-warning">Trabalhou mais do que 8 horas</span>
-                            <span ng-show="m.earlyInfraction" class="badge badge-pill badge-warning">Chegou mais de uma hora antes do expediente</span>
-                            <span ng-show="m.leaveInfraction" class="badge badge-pill badge-warning">Saiu mais de uma hora depois do expediente</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+﻿<div class="row">
+    <div class="col-sm">
+        <div class="card">
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="card">
+            <div class="card-body">
+                <ds-widget-clock start-time="startTimeValue"></ds-widget-clock>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Registrar Horario</h5>
+                <button type="button" class="btn btn-primary" ng-click="register()">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg">
+        <div class="card" ng-repeat="kvp in markings">
+            <h5 class="card-header">{{ kvp.key | date: 'MM/yyyy' }}</h5>
+            <div class="card-body">
+                <table class="table">
+                    <tbody>
+                        <tr ng-repeat="m in kvp.value">
+                            <td>{{ m.date | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ m.dayOfWeek | dayOfWeek }}</td>
+                            <td><span class="badge badge-pill badge-primary" ng-repeat="hour in m.markings track by $index">{{ hour }}</span></td>
+                            <td>
+                                <span ng-show="m.missingMarkingInfraction" class="badge badge-pill badge-warning">Falta marcações para fechar o dia</span>
+                                <span ng-show="m.minimumIntervalInfraction" class="badge badge-pill badge-warning">Intervalo mínimo excedido</span>
+                                <span ng-show="m.minimumHoursInfraction" class="badge badge-pill badge-warning">Trabalhou menos que 4 horas</span>
+                                <span ng-show="m.maximumHoursInfraction" class="badge badge-pill badge-warning">Trabalhou mais do que 8 horas</span>
+                                <span ng-show="m.earlyInfraction" class="badge badge-pill badge-warning">Chegou mais de uma hora antes do expediente</span>
+                                <span ng-show="m.leaveInfraction" class="badge badge-pill badge-warning">Saiu mais de uma hora depois do expediente</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

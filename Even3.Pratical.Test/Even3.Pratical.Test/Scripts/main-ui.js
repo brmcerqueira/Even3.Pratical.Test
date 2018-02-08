@@ -3,7 +3,7 @@
 /// <reference path="../../Scripts/typings/angularjs/angular-sanitize.d.ts"/>
 /// <reference path="../../Scripts/typings/jquery/jquery.d.ts"/> 
 /// <reference path="references.ts"/>
-var main = angular.module('even3-pratical-test', ['ngRoute', 'ngSanitize']);
+var main = angular.module('even3-pratical-test', ['ngRoute', 'ngSanitize', 'ds.clock']);
 main.config(["$routeProvider", function ($routeProvider) {
         $routeProvider.when("/", {
             templateUrl: "views/default.controller.html",
@@ -228,6 +228,12 @@ main.filter('dayOfWeek', dayOfWeekFilter);
 var DefaultController = /** @class */ (function () {
     function DefaultController($scope, $http) {
         $scope.markings = [];
+        $scope.startTime = 0;
+        $http.get('api/marking/startTime').then(function (response) {
+            $scope.startTime = response.data;
+        }, function (reason) {
+            alert(reason.data.exceptionMessage);
+        });
         if (registration) {
             $scope.register = function () {
                 $http.put('api/marking/' + registration, null).then(function () {

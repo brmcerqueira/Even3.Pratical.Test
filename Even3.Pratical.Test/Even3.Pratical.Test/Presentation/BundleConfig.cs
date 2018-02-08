@@ -12,13 +12,16 @@ namespace Even3.Pratical.Test.Presentation
                 "~/Scripts/angular.min.js",
                 "~/Scripts/angular-route.min.js",
                 "~/Scripts/angular-sanitize.min.js",
+                "~/Scripts/angular-clock.min.js",
                 "~/Scripts/main-ui.js"));
 
             bundles.Add(new AngularTemplateCacheBundle("even3-pratical-test", "~/bundles/views").Include(
                 "~/Presentation/Ui/Views/*.html"));
 
 
-            bundles.Add(new StyleBundle("~/bundles/css").Include("~/Presentation/Ui/Styles/main.css"));
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
+                "~/Presentation/Ui/Styles/main.css",
+                "~/Presentation/Ui/Styles/angular-clock.css"));
         }
     }
 }

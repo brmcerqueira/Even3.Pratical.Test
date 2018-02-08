@@ -4,6 +4,13 @@
 class DefaultController {
     constructor($scope: ng.IScope, $http: ng.IHttpService) {
         $scope.markings = [];
+        $scope.startTime = 0;
+
+        $http.get('api/marking/startTime').then(function (response) {
+            $scope.startTime = response.data;
+        }, function (reason) {
+            alert(reason.data.exceptionMessage);
+        });
 
         if (registration) {
             $scope.register = () => {

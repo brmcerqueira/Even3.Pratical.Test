@@ -6,5 +6,6 @@ namespace Even3.Pratical.Test.Business.Interfaces
     {
         IEnumerable Show(string registration);
         void Register(string registration);
+        long StartTime();
     }
 }

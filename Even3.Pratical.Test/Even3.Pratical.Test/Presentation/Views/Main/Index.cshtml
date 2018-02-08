@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript">var registration = @Html.Raw(Json.Encode(@ViewBag.Registration));</script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" src="~/bundles/css?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1">
+    <link href="~/bundles/css?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="~/bundles/ui?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1"></script>
     <script type="text/javascript" src="~/bundles/views?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1"></script>
 </head>
@@ -38,8 +38,6 @@
             </li>
         </ul>
     </header>
-    <div class="container">
-        <div class="main-container" ng-view></div>
-    </div>
+    <div class="container" ng-view></div>
 </body>
 </html>

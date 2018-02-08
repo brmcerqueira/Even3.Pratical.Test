@@ -149,11 +149,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Presentation\Ui\Styles\angular-clock.css" />
     <Content Include="Presentation\Ui\Styles\main.css" />
     <Content Include="Presentation\Ui\Views\shift.confection.controller.html" />
     <Content Include="Presentation\Ui\Views\shift.query.controller.html" />
     <Content Include="Presentation\Ui\Views\collaborator.query.controller.html" />
     <Content Include="Presentation\Ui\Views\default.controller.html" />
+    <Content Include="Scripts\angular-clock.js" />
+    <Content Include="Scripts\angular-clock.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -184,6 +187,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Presentation\Ui\Views\collaborator.confection.controller.html" />
+    <Content Include="Scripts\angular-clock.min.js.map" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

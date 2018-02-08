@@ -2,7 +2,7 @@
 
 declare var registration: string;
 
-var main = angular.module('even3-pratical-test', ['ngRoute', 'ngSanitize']);
+var main = angular.module('even3-pratical-test', ['ngRoute', 'ngSanitize', 'ds.clock']);
 
 main.config(["$routeProvider", function ($routeProvider: ng.route.IRouteProvider) {
     $routeProvider.when("/", {

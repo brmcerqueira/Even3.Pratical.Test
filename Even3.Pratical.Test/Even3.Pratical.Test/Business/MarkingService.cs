@@ -103,5 +103,10 @@ namespace Even3.Pratical.Test.Business
 
             Context.SaveChanges();
         }
+
+        public long StartTime()
+        {
+            return DateTime.Now.TimeOfDay.Ticks;
+        }
     }
 }

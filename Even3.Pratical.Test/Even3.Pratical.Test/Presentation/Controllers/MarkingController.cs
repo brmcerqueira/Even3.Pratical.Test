@@ -22,5 +22,11 @@ namespace Even3.Pratical.Test.Presentation.Controllers
         {
             Service.Register(key);
         }
+        
+        [HttpGet]
+        public long StartTime()
+        {
+            return Service.StartTime();
+        }
     }
 }

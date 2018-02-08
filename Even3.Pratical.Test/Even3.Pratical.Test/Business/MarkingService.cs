@@ -3,6 +3,7 @@ using Even3.Pratical.Test.Domain;
 using Even3.Pratical.Test.Persistence.Interfaces;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Even3.Pratical.Test.Business
@@ -28,62 +29,64 @@ namespace Even3.Pratical.Test.Business
                 e => new DateTime( e.Key.Year, e.Key.Month, e.Key.Day), 
                 e => e.Select(d => d.Date.TimeOfDay).OrderBy(d => d).ToArray());
 
-            return dictionary.Select(e =>
-            {
-                var missingMarkingInfraction = false;
-                var minimumIntervalInfraction = false;
-                var minimumHoursInfraction = false;
-                var maximumHoursInfraction = false;
-                var earlyInfraction = false;
-                var leaveInfraction = false;
-
-                var shift = queryShift.SingleOrDefault(s => s.DayOfWeek == e.Key.DayOfWeek);
-
-                if (shift != null)
+            return dictionary.GroupBy(m => new DateTime(m.Key.Year, m.Key.Month, 1)).Select(g =>
+            new KeyValuePair<DateTime, IEnumerable>(g.Key,
+                g.Select(e =>
                 {
-                    missingMarkingInfraction = e.Value.Length < 2 || (e.Value.Length % 2 != 0);
+                    var missingMarkingInfraction = false;
+                    var minimumIntervalInfraction = false;
+                    var minimumHoursInfraction = false;
+                    var maximumHoursInfraction = false;
+                    var earlyInfraction = false;
+                    var leaveInfraction = false;
 
-                    if (!missingMarkingInfraction)
+                    var shift = queryShift.SingleOrDefault(s => s.DayOfWeek == e.Key.DayOfWeek);
+
+                    if (shift != null)
                     {
-                        var interval = TimeSpan.Zero;
+                        missingMarkingInfraction = e.Value.Length < 2 || (e.Value.Length % 2 != 0);
 
-                        if (e.Value.Length > 2)
+                        if (!missingMarkingInfraction)
                         {
-                            var intoMarking = e.Value.Skip(1).Take(e.Value.Length - 2).ToArray();
+                            var interval = TimeSpan.Zero;
 
-                            for (int i = 0; i < intoMarking.Length; i += 2)
+                            if (e.Value.Length > 2)
                             {
-                                interval += intoMarking[i + 1] - intoMarking[i];
+                                var intoMarking = e.Value.Skip(1).Take(e.Value.Length - 2).ToArray();
+
+                                for (int i = 0; i < intoMarking.Length; i += 2)
+                                {
+                                    interval += intoMarking[i + 1] - intoMarking[i];
+                                }
+
+                                minimumIntervalInfraction = interval < shift.Interval;
                             }
 
-                            minimumIntervalInfraction = interval < shift.Interval;
+                            var first = e.Value.First();
+                            var last = e.Value.Last();
+
+                            earlyInfraction = first < (shift.Input - TimeSpan.FromHours(1));
+                            leaveInfraction = last > (shift.Output + TimeSpan.FromHours(1));
+
+                            var total = last - first - interval;
+                            minimumHoursInfraction = total < TimeSpan.FromHours(4);
+                            maximumHoursInfraction = total > TimeSpan.FromHours(8);
                         }
-
-                        var first = e.Value.First();
-                        var last = e.Value.Last();
-
-                        earlyInfraction = first < (shift.Input - TimeSpan.FromHours(1));
-                        leaveInfraction = last > (shift.Output + TimeSpan.FromHours(1));
-
-                        var total = last - first - interval;
-                        minimumHoursInfraction = total < TimeSpan.FromHours(4);
-                        maximumHoursInfraction = total > TimeSpan.FromHours(8);
                     }
-                }
 
-                return new
-                {
-                   Date = e.Key,
-                   e.Key.DayOfWeek,
-                   Markings = e.Value,
-                   MissingMarkingInfraction = missingMarkingInfraction,
-                   MinimumIntervalInfraction = minimumIntervalInfraction,
-                   MinimumHoursInfraction = minimumHoursInfraction,
-                   MaximumHoursInfraction = maximumHoursInfraction,
-                   EarlyInfraction = earlyInfraction,
-                   LeaveInfraction = leaveInfraction,
-                };
-            });
+                    return new 
+                    {
+                        Date = e.Key,
+                        e.Key.DayOfWeek,
+                        Markings = e.Value.Select(t => string.Format("{0:hh\\:mm}", t)),
+                        MissingMarkingInfraction = missingMarkingInfraction,
+                        MinimumIntervalInfraction = minimumIntervalInfraction,
+                        MinimumHoursInfraction = minimumHoursInfraction,
+                        MaximumHoursInfraction = maximumHoursInfraction,
+                        EarlyInfraction = earlyInfraction,
+                        LeaveInfraction = leaveInfraction,
+                    };
+                })));
         }
 
         public void Register(long collaboratorId)

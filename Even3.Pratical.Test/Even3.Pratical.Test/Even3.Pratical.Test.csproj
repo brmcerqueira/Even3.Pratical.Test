@@ -285,6 +285,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Presentation\Ui\day.of.week.filter.ts" />
     <TypeScriptCompile Include="Presentation\Ui\default.controller.ts" />
     <TypeScriptCompile Include="Presentation\Ui\main.ts" />
     <TypeScriptCompile Include="Presentation\Ui\references.ts" />

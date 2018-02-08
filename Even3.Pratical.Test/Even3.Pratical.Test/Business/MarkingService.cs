@@ -17,13 +17,13 @@ namespace Even3.Pratical.Test.Business
             Context = context;
         }
       
-        public IEnumerable Show(long collaboratorId)
+        public IEnumerable Show(string registration)
         {
             IQueryable<Marking> queryMarking = Context.CreateDao<Marking>();
             IQueryable<Shift> queryShift = Context.CreateDao<Shift>();
 
             var dictionary = (from mar in queryMarking
-                    where mar.Collaborator.Id == collaboratorId
+                    where mar.Collaborator.Registration == registration
                     group mar by new { mar.Date.Year, mar.Date.Month, mar.Date.Day } into g
                     select g).ToDictionary(
                 e => new DateTime( e.Key.Year, e.Key.Month, e.Key.Day), 
@@ -89,7 +89,7 @@ namespace Even3.Pratical.Test.Business
                 })));
         }
 
-        public void Register(long collaboratorId)
+        public void Register(string registration)
         {
             var daoMarking = Context.CreateDao<Marking>();
             var daoCollaborator = Context.CreateDao<Collaborator>();
@@ -97,7 +97,7 @@ namespace Even3.Pratical.Test.Business
             var entity = daoMarking.Create();
 
             entity.Date = DateTime.Now;
-            entity.Collaborator = daoCollaborator.GetReference(e => e.Id = collaboratorId);
+            entity.Collaborator = daoCollaborator.Single(e => e.Registration == registration);
 
             daoMarking.Add(entity);
 

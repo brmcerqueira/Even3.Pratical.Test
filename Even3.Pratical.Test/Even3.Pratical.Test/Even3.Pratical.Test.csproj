@@ -74,6 +74,12 @@
     <Reference Include="LightInject, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LightInject.5.0.0\lib\net46\LightInject.dll</HintPath>
     </Reference>
+    <Reference Include="LightInject.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.Mvc.2.0.0\lib\net46\LightInject.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject.Web, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.Web.2.0.0\lib\net46\LightInject.Web.dll</HintPath>
+    </Reference>
     <Reference Include="LightInject.WebApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LightInject.WebApi.2.0.0\lib\net46\LightInject.WebApi.dll</HintPath>
     </Reference>
@@ -208,9 +214,11 @@
     <Compile Include="Business\Interfaces\Dtos\Savers\ICollaboratorSaveDto.cs" />
     <Compile Include="Business\Interfaces\Dtos\Savers\IShiftSaveDto.cs" />
     <Compile Include="Business\Interfaces\IConfectionService.cs" />
+    <Compile Include="Business\Interfaces\ICollaboratorService.cs" />
     <Compile Include="Business\Interfaces\IMarkingService.cs" />
     <Compile Include="Business\Interfaces\IQueryService.cs" />
     <Compile Include="Business\Interfaces\IReadConfectionService.cs" />
+    <Compile Include="Business\CollaboratorService.cs" />
     <Compile Include="Business\MarkingService.cs" />
     <Compile Include="Business\Queries\CollaboratorQueryService.cs" />
     <Compile Include="Business\Queries\QueryService.cs" />
@@ -229,6 +237,7 @@
     <Compile Include="Persistence\MigrationsConfiguration.cs" />
     <Compile Include="Persistence\PersistenceCompositionRoot.cs" />
     <Compile Include="Presentation\BundleConfig.cs" />
+    <Compile Include="Presentation\Controllers\CollaboratorController.cs" />
     <Compile Include="Presentation\Controllers\Confections\ConfectionController.cs" />
     <Compile Include="Presentation\Controllers\Confections\CollaboratorConfectionController.cs" />
     <Compile Include="Presentation\Controllers\Confections\ShiftConfectionController.cs" />
@@ -289,6 +298,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Presentation\Ui\main.controller.ts" />
     <TypeScriptCompile Include="Presentation\Ui\shift.confection.controller.ts" />
     <TypeScriptCompile Include="Presentation\Ui\collaborator.confection.controller.ts" />
     <TypeScriptCompile Include="Presentation\Ui\shift.query.controller.ts" />

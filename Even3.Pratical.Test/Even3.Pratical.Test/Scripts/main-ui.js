@@ -24,6 +24,20 @@ main.config(["$routeProvider", function ($routeProvider) {
     }]);
 /// <reference path="references.ts"/>
 /// <reference path="main.ts"/>
+var MainController = /** @class */ (function () {
+    function MainController($scope, $http) {
+        $scope.name = null;
+        $http.get('api/collaborator/' + registration).then(function (response) {
+            $scope.name = response.data;
+        }, function (reason) {
+            alert(reason.data.exceptionMessage);
+        });
+    }
+    return MainController;
+}());
+main.controller('mainController', ['$scope', '$http', MainController]);
+/// <reference path="references.ts"/>
+/// <reference path="main.ts"/>
 var ShiftConfectionController = /** @class */ (function () {
     function ShiftConfectionController($scope, $http, keyService) {
         var url = 'api/shiftConfection/';
@@ -223,10 +237,9 @@ main.filter('dayOfWeek', dayOfWeekFilter);
 /// <reference path="main.ts"/>
 var DefaultController = /** @class */ (function () {
     function DefaultController($scope, $http) {
-        var collaboratorId = 1;
         $scope.markings = [];
         $scope.register = function () {
-            $http.put('api/marking/' + collaboratorId, null).then(function () {
+            $http.put('api/marking/' + registration, null).then(function () {
                 updateMarkings();
                 alert("registrado!");
             }, function (reason) {
@@ -234,7 +247,7 @@ var DefaultController = /** @class */ (function () {
             });
         };
         var updateMarkings = function () {
-            $http.get('api/marking/' + collaboratorId).then(function (response) {
+            $http.get('api/marking/' + registration).then(function (response) {
                 $scope.markings = response.data;
             }, function (reason) {
                 alert(reason.data.exceptionMessage);

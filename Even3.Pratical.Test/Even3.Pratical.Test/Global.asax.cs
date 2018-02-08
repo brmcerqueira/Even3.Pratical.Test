@@ -44,18 +44,16 @@ namespace Even3.Pratical.Test
 
             RouteTable.Routes.MapRoute(
                 name: "DefaultMvc",
-                url: "{controller}/{action}",
+                url: "{key}",
                 defaults: new { controller = "Main", action = "Index" }
             );
 
-            var serviceContainer = new ServiceContainer
-            {
-                ScopeManagerProvider = new PerLogicalCallContextScopeManagerProvider()
-            };
+            var serviceContainer = new ServiceContainer();
             serviceContainer.RegisterFrom<PersistenceCompositionRoot>();
             serviceContainer.RegisterFrom<BusinessCompositionRoot>();
             serviceContainer.RegisterApiControllers();
             serviceContainer.EnableWebApi(configuration);
+            serviceContainer.ScopeManagerProvider = new PerLogicalCallContextScopeManagerProvider();
 
             configuration.MessageHandlers.Add(new RequestDelegatingHandler(serviceContainer));
         }

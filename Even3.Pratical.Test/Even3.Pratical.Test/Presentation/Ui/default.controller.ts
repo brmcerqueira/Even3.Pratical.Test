@@ -3,12 +3,10 @@
 
 class DefaultController {
     constructor($scope: ng.IScope, $http: ng.IHttpService) {
-        var collaboratorId = 1;
-
         $scope.markings = [];
 
         $scope.register = () => {
-            $http.put('api/marking/' + collaboratorId, null).then(function () {
+            $http.put('api/marking/' + registration, null).then(function () {
                 updateMarkings();
                 alert("registrado!");
             }, function (reason) {
@@ -17,7 +15,7 @@ class DefaultController {
         }
 
         var updateMarkings = function () {
-            $http.get('api/marking/' + collaboratorId).then(function (response) {
+            $http.get('api/marking/' + registration).then(function (response) {
                 $scope.markings = response.data;
             }, function (reason) {
                 alert(reason.data.exceptionMessage);

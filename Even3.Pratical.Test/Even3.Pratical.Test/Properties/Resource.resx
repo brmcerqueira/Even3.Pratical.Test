@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DayOfWeek" xml:space="preserve">
+    <value>Dia da Semana</value>
+  </data>
+  <data name="DuplicateEntityException" xml:space="preserve">
+    <value>Entidade já foi cadastrada.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="Interval" xml:space="preserve">
+    <value>Intervalo</value>
+  </data>
   <data name="LogicalCallContextLifetimeException" xml:space="preserve">
     <value>Tentativa de criar um objeto descartável, sem um escopo atual.</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nome</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Saída</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Matrícula</value>
   </data>
   <data name="Validation" xml:space="preserve">
     <value>Validação</value>

@@ -6,6 +6,12 @@ class DefaultController {
         $scope.markings = [];
         $scope.startTime = 0;
 
+        $scope.channel = {
+            videoHeight: 400,
+            videoWidth: 300,
+            video: null
+        };
+
         $http.get('api/marking/startTime').then(function (response) {
             $scope.startTime = response.data;
         }, function (reason) {

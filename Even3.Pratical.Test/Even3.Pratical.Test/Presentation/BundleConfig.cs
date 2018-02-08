@@ -12,6 +12,7 @@ namespace Even3.Pratical.Test.Presentation
                 "~/Scripts/angular.min.js",
                 "~/Scripts/angular-route.min.js",
                 "~/Scripts/angular-sanitize.min.js",
+                "~/Scripts/webcam.min.js",
                 "~/Scripts/angular-clock.min.js",
                 "~/Scripts/main-ui.js"));
 

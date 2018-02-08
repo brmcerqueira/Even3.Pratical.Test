@@ -11,24 +11,33 @@
     <script type="text/javascript" src="~/bundles/views?v=WW2Zqu4rTmvC2w8fLdK2R8aobhpR0_-6Y0_tTR9xWnE1"></script>
 </head>
 <body ng-controller="mainController">
-    <h1>{{ name }}</h1>
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link active" href="#!">Ponto</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#!collaboratorQuery">Lista de Colaboradores</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#!collaboratorConfection">Cadastro de Colaboradores</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#!shiftQuery">Lista de Horarios</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#!shiftConfection">Cadastro de Horarios</a>
-        </li>
-    </ul>
+    <header class="navbar navbar-expand flex-column flex-md-row bd-navbar">
+        <a class="navbar-brand mr-0 mr-md-2" href="#">Even3</a>
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="#!">Ponto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!collaboratorQuery">Lista de Colaboradores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!collaboratorConfection">Cadastro de Colaboradores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!shiftQuery">Lista de Horarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!shiftConfection">Cadastro de Horarios</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <li class="nav-item">
+                <a class="nav-link" href="#">{{ name }}</a>
+            </li>
+        </ul>
+    </header>
     <div class="container">
         <div class="main-container" ng-view></div>
     </div>

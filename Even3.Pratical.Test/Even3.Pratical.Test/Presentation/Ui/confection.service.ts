@@ -14,7 +14,7 @@ class ConfectionService {
         if (key) {
             this.$http.get(url + key).then(function (response) {
                 load(response.data);
-            });
+            }, errorCallback);
         }
 
         scope.save = () => {
@@ -23,17 +23,13 @@ class ConfectionService {
             if (key) {
                 this.$http.post(url + key, entity).then(function () {
                     alert("salvo!");
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
             else {
                 this.$http.put(url, entity).then(function () {
                     alert("salvo!");
                     init();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
         }
     }

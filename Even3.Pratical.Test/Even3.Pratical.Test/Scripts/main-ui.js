@@ -3,6 +3,9 @@
 /// <reference path="../../Scripts/typings/angularjs/angular-sanitize.d.ts"/>
 /// <reference path="../../Scripts/typings/jquery/jquery.d.ts"/> 
 /// <reference path="references.ts"/>
+function errorCallback(reason) {
+    alert(reason.data.exceptionMessage);
+}
 var main = angular.module('even3-pratical-test', ['ngRoute', 'ngSanitize', 'ds.clock', 'webcam']);
 main.config(["$routeProvider", function ($routeProvider) {
         $routeProvider.when("/", {
@@ -37,24 +40,20 @@ var ConfectionService = /** @class */ (function () {
         if (key) {
             this.$http.get(url + key).then(function (response) {
                 load(response.data);
-            });
+            }, errorCallback);
         }
         scope.save = function () {
             var entity = prepareToSave();
             if (key) {
                 _this.$http.post(url + key, entity).then(function () {
                     alert("salvo!");
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
             else {
                 _this.$http.put(url, entity).then(function () {
                     alert("salvo!");
                     init();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
         };
     };
@@ -70,9 +69,7 @@ var MainController = /** @class */ (function () {
         if (registration) {
             $http.get('api/collaborator/' + registration).then(function (response) {
                 $scope.name = response.data ? response.data : userNotFoundMessage;
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
+            }, errorCallback);
         }
         else {
             $scope.name = userNotFoundMessage;
@@ -101,17 +98,13 @@ var QueryService = /** @class */ (function () {
                 _this.$http.delete(removeRoute + id).then(function () {
                     alert("excluido!");
                     updateSource();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
         };
         var updateSource = function () {
             _this.$http.put(queryRoute, {}).then(function (response) {
                 scope.source = response.data;
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
+            }, errorCallback);
         };
         updateSource();
     };
@@ -236,24 +229,18 @@ var DefaultController = /** @class */ (function () {
         };
         $http.get('api/marking/startTime').then(function (response) {
             $scope.startTime = response.data;
-        }, function (reason) {
-            alert(reason.data.exceptionMessage);
-        });
+        }, errorCallback);
         if (registration) {
             $scope.register = function () {
                 $http.put('api/marking/' + registration, null).then(function () {
                     updateMarkings();
                     alert("registrado!");
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             };
             var updateMarkings = function () {
                 $http.get('api/marking/' + registration).then(function (response) {
                     $scope.markings = response.data;
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             };
             updateMarkings();
         }

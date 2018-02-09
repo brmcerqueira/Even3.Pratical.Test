@@ -2,6 +2,10 @@
 
 declare var registration: string;
 
+function errorCallback(reason: any): void {
+    alert(reason.data.exceptionMessage);
+}
+
 var main = angular.module('even3-pratical-test', ['ngRoute', 'ngSanitize', 'ds.clock', 'webcam']);
 
 main.config(["$routeProvider", function ($routeProvider: ng.route.IRouteProvider) {

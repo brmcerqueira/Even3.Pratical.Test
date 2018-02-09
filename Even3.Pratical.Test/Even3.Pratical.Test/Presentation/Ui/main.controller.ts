@@ -8,9 +8,7 @@ class MainController {
         if (registration) {
             $http.get('api/collaborator/' + registration).then(function (response) {
                 $scope.name = response.data ? response.data : userNotFoundMessage;
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
+            }, errorCallback);
         }
         else {
             $scope.name = userNotFoundMessage;

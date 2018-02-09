@@ -18,18 +18,14 @@ class QueryService {
                 this.$http.delete(removeRoute + id).then(function () {
                     alert("excluido!");
                     updateSource();
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
         }
 
         var updateSource = () => {
             this.$http.put(queryRoute, {}).then(function (response) {
                 scope.source = response.data;
-            }, function (reason) {
-                alert(reason.data.exceptionMessage);
-            });
+            }, errorCallback);
         }
 
         updateSource();

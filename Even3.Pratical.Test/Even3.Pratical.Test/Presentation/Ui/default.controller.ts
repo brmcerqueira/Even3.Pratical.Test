@@ -14,26 +14,20 @@ class DefaultController {
 
         $http.get('api/marking/startTime').then(function (response) {
             $scope.startTime = response.data;
-        }, function (reason) {
-            alert(reason.data.exceptionMessage);
-        });
+        }, errorCallback);
 
         if (registration) {
             $scope.register = () => {
                 $http.put('api/marking/' + registration, null).then(function () {
                     updateMarkings();
                     alert("registrado!");
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
 
             var updateMarkings = function () {
                 $http.get('api/marking/' + registration).then(function (response) {
                     $scope.markings = response.data;
-                }, function (reason) {
-                    alert(reason.data.exceptionMessage);
-                });
+                }, errorCallback);
             }
 
             updateMarkings();
